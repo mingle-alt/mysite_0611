@@ -652,6 +652,32 @@
       }
     },
     {
+      "name": "Vercel",
+      "url": "https://vercel.com/",
+      "category": "build",
+      "subcategory": "배포/협업",
+      "kind": "code",
+      "tags": [
+        "배포",
+        "호스팅",
+        "프론트엔드"
+      ],
+      "summary": "프론트엔드 배포와 호스팅에 특화된 클라우드 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": true,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "developer",
+        "automation"
+      ],
+      "links": {
+        "official": "https://vercel.com/",
+        "pricing": "https://vercel.com/pricing",
+        "docs": "https://vercel.com/docs"
+      }
+    },
+    {
       "name": "Hugging Face",
       "url": "https://huggingface.co/",
       "category": "dev",
