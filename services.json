@@ -109,7 +109,8 @@
       ],
       "links": {
         "official": "https://claude.ai/",
-        "docs": "https://claude.ai/"
+        "docs": "https://platform.claude.com/docs/en/home",
+        "pricing": "https://claude.com/pricing"
       }
     },
     {
@@ -135,7 +136,8 @@
       ],
       "links": {
         "official": "https://gemini.google.com/",
-        "docs": "https://gemini.google.com/"
+        "docs": "https://ai.google.dev/gemini-api/docs",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
       }
     },
     {
@@ -157,7 +159,7 @@
       "recommendedFor": [],
       "links": {
         "official": "https://grok.com/",
-        "docs": "https://grok.com/"
+        "docs": "https://docs.x.ai/overview"
       }
     },
     {
@@ -588,7 +590,7 @@
       ],
       "links": {
         "official": "https://github.com/features/copilot",
-        "docs": "https://github.com/features/copilot"
+        "docs": "https://docs.github.com/en/copilot"
       }
     },
     {
@@ -611,7 +613,7 @@
       "links": {
         "official": "https://github.com/",
         "pricing": "https://github.com/pricing",
-        "docs": "https://github.com/"
+        "docs": "https://docs.github.com/en"
       }
     },
     {
@@ -635,7 +637,7 @@
       ],
       "links": {
         "official": "https://huggingface.co/",
-        "docs": "https://huggingface.co/"
+        "docs": "https://huggingface.co/docs"
       }
     },
     {
@@ -659,7 +661,8 @@
       ],
       "links": {
         "official": "https://platform.openai.com/",
-        "docs": "https://platform.openai.com/"
+        "docs": "https://developers.openai.com/api/docs",
+        "pricing": "https://openai.com/api/pricing/"
       }
     },
     {
@@ -683,7 +686,8 @@
       ],
       "links": {
         "official": "https://aistudio.google.com/",
-        "docs": "https://aistudio.google.com/"
+        "docs": "https://ai.google.dev/gemini-api/docs",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
       }
     },
     {
@@ -705,7 +709,8 @@
       "recommendedFor": [],
       "links": {
         "official": "https://console.anthropic.com/",
-        "docs": "https://console.anthropic.com/"
+        "docs": "https://platform.claude.com/docs/en/home",
+        "pricing": "https://claude.com/pricing"
       }
     },
     {
@@ -727,7 +732,8 @@
       "recommendedFor": [],
       "links": {
         "official": "https://replicate.com/",
-        "docs": "https://replicate.com/"
+        "docs": "https://replicate.com/docs",
+        "pricing": "https://replicate.com/pricing"
       }
     },
     {
@@ -749,7 +755,7 @@
       "recommendedFor": [],
       "links": {
         "official": "https://www.langchain.com/",
-        "docs": "https://www.langchain.com/"
+        "docs": "https://docs.langchain.com/"
       }
     },
     {
@@ -774,7 +780,7 @@
       ],
       "links": {
         "official": "https://ollama.com/",
-        "docs": "https://ollama.com/"
+        "docs": "https://docs.ollama.com/"
       }
     },
     {
