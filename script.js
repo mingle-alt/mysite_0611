@@ -1,10 +1,8 @@
 const state = {
   categories: [],
-  recommendations: [],
   services: [],
   activeCategory: "",
   activeSubcategory: "전체",
-  activeRecommendation: "",
   filters: {
     free: false,
     korean: false,
@@ -28,7 +26,6 @@ const labels = {
 };
 
 const categoryMenu = document.querySelector("#categoryMenu");
-const recommendationTags = document.querySelector("#recommendationTags");
 const cards = document.querySelector("#cards");
 const searchInput = document.querySelector("#searchInput");
 const activeTitle = document.querySelector("#activeTitle");
@@ -79,8 +76,6 @@ function serviceMatches(service) {
   const startsFree = service.pricing === "free" || service.pricing === "freemium";
   const hasDifficulty =
     state.filters.difficulty === "all" || service.difficulty === state.filters.difficulty;
-  const inRecommendation =
-    !state.activeRecommendation || service.recommendedFor?.includes(state.activeRecommendation);
   const haystack = [
     service.name,
     service.summary,
@@ -94,24 +89,12 @@ function serviceMatches(service) {
 
   return (
     serviceInActiveCategory(service) &&
-    inRecommendation &&
     (!state.filters.free || startsFree) &&
     (!state.filters.korean || service.korean) &&
     (!state.filters.api || service.api) &&
     hasDifficulty &&
     (!query || haystack.includes(query))
   );
-}
-
-function renderRecommendations() {
-  const buttons = [
-    `<button class="recommendation-tag ${state.activeRecommendation ? "" : "active"}" data-recommendation="">전체 추천</button>`,
-    ...state.recommendations.map(
-      (item) =>
-        `<button class="recommendation-tag ${item.id === state.activeRecommendation ? "active" : ""}" data-recommendation="${escapeAttr(item.id)}">${escapeHtml(item.label)}</button>`,
-    ),
-  ];
-  recommendationTags.innerHTML = buttons.join("");
 }
 
 function renderCategoryMenu() {
@@ -159,13 +142,11 @@ function cardTemplate(service) {
 function renderCards() {
   const category = state.categories.find((item) => item.id === state.activeCategory);
   const visible = state.services.filter(serviceMatches);
-  const recommendation = state.recommendations.find((item) => item.id === state.activeRecommendation);
 
   activeTitle.textContent = category.label;
   activeMeta.textContent = [
     category.description,
     state.activeSubcategory,
-    recommendation?.label,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -177,14 +158,12 @@ function renderCards() {
 }
 
 function render() {
-  renderRecommendations();
   renderCategoryMenu();
   renderCards();
 }
 
 function resetAllFilters() {
   state.filters = { free: false, korean: false, api: false, difficulty: "all", query: "" };
-  state.activeRecommendation = "";
   searchInput.value = "";
   freeFilter.checked = false;
   koreanFilter.checked = false;
@@ -192,13 +171,6 @@ function resetAllFilters() {
   difficultyFilter.value = "all";
   render();
 }
-
-recommendationTags.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-recommendation]");
-  if (!button) return;
-  state.activeRecommendation = button.dataset.recommendation;
-  render();
-});
 
 categoryMenu.addEventListener("click", (event) => {
   const categoryButton = event.target.closest(".accordion-trigger");
@@ -245,7 +217,6 @@ async function init() {
     if (!response.ok) throw new Error("services.json을 불러오지 못했습니다.");
     const data = await response.json();
     state.categories = data.categories;
-    state.recommendations = data.recommendations;
     state.services = data.services;
     state.activeCategory = data.categories[0].id;
     render();
