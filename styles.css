@@ -447,6 +447,11 @@ h2 {
   color: #8a5a10;
 }
 
+.badge.automation {
+  background: rgba(104, 74, 196, 0.13);
+  color: #5739a3;
+}
+
 .card h3 {
   margin: 16px 0 8px;
   font-size: 20px;

@@ -57,6 +57,17 @@
         "학술/리서치",
         "회의"
       ]
+    },
+    {
+      "id": "automation",
+      "label": "자동화/에이전트",
+      "description": "반복 업무 자동화와 앱 연결형 AI 에이전트",
+      "subcategories": [
+        "전체",
+        "업무 자동화",
+        "AI 에이전트",
+        "앱 연결"
+      ]
     }
   ],
   "recommendations": [
@@ -84,6 +95,11 @@
       "id": "free",
       "label": "무료로 먼저 써볼 만한 서비스",
       "description": "무료 플랜이나 무료 사용성이 좋은 도구"
+    },
+    {
+      "id": "automation",
+      "label": "자동화 추천",
+      "description": "반복 업무, 앱 연결, 에이전트 운영에 유용한 도구"
     }
   ],
   "services": [
@@ -918,6 +934,133 @@
       ],
       "links": {
         "official": "https://otter.ai/"
+      }
+    },
+    {
+      "name": "Zapier AI",
+      "url": "https://zapier.com/ai",
+      "category": "automation",
+      "subcategory": "앱 연결",
+      "kind": "automation",
+      "tags": [
+        "앱 연결",
+        "워크플로",
+        "노코드"
+      ],
+      "summary": "9,000개 이상의 앱을 연결해 반복 업무를 자동화하고 AI 에이전트, 챗봇, MCP 연동까지 구성할 수 있는 자동화 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": true,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "automation",
+        "work"
+      ],
+      "links": {
+        "official": "https://zapier.com/ai",
+        "docs": "https://platform.zapier.com/docs",
+        "pricing": "https://zapier.com/pricing"
+      }
+    },
+    {
+      "name": "Gumloop",
+      "url": "https://www.gumloop.com/",
+      "category": "automation",
+      "subcategory": "업무 자동화",
+      "kind": "automation",
+      "tags": [
+        "자동화",
+        "워크플로",
+        "AI 에이전트"
+      ],
+      "summary": "문서 처리, 리서치, CRM, 데이터 정리 같은 반복 업무를 노드 기반 AI 워크플로로 자동화하는 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "automation",
+        "work"
+      ],
+      "links": {
+        "official": "https://www.gumloop.com/",
+        "pricing": "https://www.gumloop.com/pricing"
+      }
+    },
+    {
+      "name": "Lindy",
+      "url": "https://www.lindy.ai/",
+      "category": "automation",
+      "subcategory": "AI 에이전트",
+      "kind": "automation",
+      "tags": [
+        "업무 에이전트",
+        "이메일",
+        "CRM"
+      ],
+      "summary": "이메일, 일정, 리서치, 고객 관리 같은 업무를 여러 앱과 연결해 수행하는 업무용 AI 에이전트 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": true,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "automation",
+        "work"
+      ],
+      "links": {
+        "official": "https://www.lindy.ai/",
+        "docs": "https://docs.lindy.ai/",
+        "pricing": "https://www.lindy.ai/pricing"
+      }
+    },
+    {
+      "name": "Kimi",
+      "url": "https://www.kimi.com/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "Moonshot AI",
+        "긴 문맥",
+        "에이전트"
+      ],
+      "summary": "Moonshot AI의 대화형 AI입니다. 긴 문맥 처리, 문서 기반 질의, 코딩과 에이전트 작업에 활용하기 좋습니다.",
+      "pricing": "freemium",
+      "korean": true,
+      "api": true,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "beginner",
+        "developer"
+      ],
+      "links": {
+        "official": "https://www.kimi.com/",
+        "docs": "https://platform.kimi.ai/docs/overview",
+        "pricing": "https://platform.kimi.ai/docs/pricing"
+      }
+    },
+    {
+      "name": "Qwen",
+      "url": "https://chat.qwen.ai/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "Alibaba",
+        "오픈 모델",
+        "멀티모달"
+      ],
+      "summary": "Alibaba Cloud의 Qwen 모델을 웹에서 사용할 수 있는 공식 챗 서비스입니다. 오픈 모델 생태계와 함께 비교해보기 좋습니다.",
+      "pricing": "freemium",
+      "korean": true,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "beginner",
+        "developer"
+      ],
+      "links": {
+        "official": "https://chat.qwen.ai/"
       }
     }
   ]
