@@ -214,7 +214,7 @@ resetFilters.addEventListener("click", resetAllFilters);
 async function loadVisitorCount() {
   const el = document.querySelector("#visitorCount");
   try {
-    const res = await fetch("https://api.counterapi.dev/v1/ai-link-hub-mysite/visits/up");
+    const res = await fetch("/api/visits");
     if (!res.ok) throw new Error();
     const { count } = await res.json();
     el.textContent = count.toLocaleString("ko-KR");
