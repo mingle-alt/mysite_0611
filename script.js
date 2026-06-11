@@ -5,7 +5,6 @@ const state = {
   activeCategory: "",
   activeSubcategory: "전체",
   activeRecommendation: "",
-  favorites: new Set(),
   filters: {
     free: false,
     korean: false,
@@ -28,8 +27,8 @@ const labels = {
   },
 };
 
-const tabs = document.querySelector("#categoryTabs");
-const sideMenu = document.querySelector("#sideMenu");
+const categoryMenu = document.querySelector("#categoryMenu");
+const recommendationTags = document.querySelector("#recommendationTags");
 const cards = document.querySelector("#cards");
 const searchInput = document.querySelector("#searchInput");
 const activeTitle = document.querySelector("#activeTitle");
@@ -40,19 +39,6 @@ const koreanFilter = document.querySelector("#koreanFilter");
 const apiFilter = document.querySelector("#apiFilter");
 const difficultyFilter = document.querySelector("#difficultyFilter");
 const resetFilters = document.querySelector("#resetFilters");
-const recommendationTabs = document.querySelector("#recommendationTabs");
-const recommendedCards = document.querySelector("#recommendedCards");
-
-function getSavedFavorites() {
-  try {
-    const value = JSON.parse(localStorage.getItem("ai-link-favorites") || "[]");
-    return Array.isArray(value) ? value : [];
-  } catch {
-    return [];
-  }
-}
-
-state.favorites = new Set(getSavedFavorites());
 
 function escapeHtml(value) {
   return String(value)
@@ -72,39 +58,29 @@ function favicon(url) {
   return `https://www.google.com/s2/favicons?domain=${host}&sz=64`;
 }
 
-function saveFavorites() {
-  localStorage.setItem("ai-link-favorites", JSON.stringify([...state.favorites]));
+function placementsFor(service) {
+  return [
+    { category: service.category, subcategory: service.subcategory },
+    ...(service.extraPlacements || []),
+  ];
 }
 
-async function copyText(value) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(value);
-    return;
-  }
-
-  const textarea = document.createElement("textarea");
-  textarea.value = value;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = "0";
-  document.body.append(textarea);
-  textarea.select();
-
-  try {
-    if (!document.execCommand("copy")) throw new Error("copy command failed");
-  } finally {
-    textarea.remove();
-  }
+function serviceInActiveCategory(service) {
+  return placementsFor(service).some((placement) => {
+    const inCategory = placement.category === state.activeCategory;
+    const inSubcategory =
+      state.activeSubcategory === "전체" || placement.subcategory === state.activeSubcategory;
+    return inCategory && inSubcategory;
+  });
 }
 
 function serviceMatches(service) {
   const query = state.filters.query;
-  const inCategory = service.category === state.activeCategory;
-  const inSubcategory =
-    state.activeSubcategory === "전체" || service.subcategory === state.activeSubcategory;
   const startsFree = service.pricing === "free" || service.pricing === "freemium";
   const hasDifficulty =
     state.filters.difficulty === "all" || service.difficulty === state.filters.difficulty;
+  const inRecommendation =
+    !state.activeRecommendation || service.recommendedFor?.includes(state.activeRecommendation);
   const haystack = [
     service.name,
     service.summary,
@@ -117,8 +93,8 @@ function serviceMatches(service) {
     .toLowerCase();
 
   return (
-    inCategory &&
-    inSubcategory &&
+    serviceInActiveCategory(service) &&
+    inRecommendation &&
     (!state.filters.free || startsFree) &&
     (!state.filters.korean || service.korean) &&
     (!state.filters.api || service.api) &&
@@ -127,94 +103,55 @@ function serviceMatches(service) {
   );
 }
 
-function renderTabs() {
-  tabs.innerHTML = state.categories
-    .map(
-      (category) =>
-        `<button class="tab ${category.id === state.activeCategory ? "active" : ""}" data-category="${escapeAttr(category.id)}">${escapeHtml(category.label)}</button>`,
-    )
-    .join("");
-}
-
-function renderSideMenu() {
-  const category = state.categories.find((item) => item.id === state.activeCategory);
-  sideMenu.innerHTML = category.subcategories
-    .map(
-      (item) =>
-        `<button class="side-item ${item === state.activeSubcategory ? "active" : ""}" data-subcategory="${escapeAttr(item)}">${escapeHtml(item)}</button>`,
-    )
-    .join("");
-}
-
 function renderRecommendations() {
-  recommendationTabs.innerHTML = state.recommendations
-    .map(
+  const buttons = [
+    `<button class="recommendation-tag ${state.activeRecommendation ? "" : "active"}" data-recommendation="">전체 추천</button>`,
+    ...state.recommendations.map(
       (item) =>
-        `<button class="recommendation-tab ${item.id === state.activeRecommendation ? "active" : ""}" data-recommendation="${escapeAttr(item.id)}">${escapeHtml(item.label)}</button>`,
-    )
-    .join("");
+        `<button class="recommendation-tag ${item.id === state.activeRecommendation ? "active" : ""}" data-recommendation="${escapeAttr(item.id)}">${escapeHtml(item.label)}</button>`,
+    ),
+  ];
+  recommendationTags.innerHTML = buttons.join("");
+}
 
-  const active = state.recommendations.find((item) => item.id === state.activeRecommendation);
-  const visible = state.services.filter((service) => service.recommendedFor.includes(active.id)).slice(0, 6);
+function renderCategoryMenu() {
+  categoryMenu.innerHTML = state.categories
+    .map((category) => {
+      const isOpen = category.id === state.activeCategory;
+      const subitems = category.subcategories
+        .map(
+          (subcategory) =>
+            `<button class="subcategory-item ${isOpen && subcategory === state.activeSubcategory ? "active" : ""}" data-category="${escapeAttr(category.id)}" data-subcategory="${escapeAttr(subcategory)}">${escapeHtml(subcategory)}</button>`,
+        )
+        .join("");
 
-  recommendedCards.innerHTML = visible
-    .map(
-      (service) => `
-        <article class="mini-card">
-          <img class="logo small" src="${escapeAttr(favicon(service.url))}" alt="" loading="lazy" />
-          <div>
-            <strong>${escapeHtml(service.name)}</strong>
-            <span>${escapeHtml(active.description)}</span>
-          </div>
-          <a href="${escapeAttr(service.url)}" target="_blank" rel="noreferrer" aria-label="${escapeAttr(service.name)} 열기">열기</a>
-        </article>
-      `,
-    )
+      return `
+        <section class="accordion-item ${isOpen ? "open" : ""}">
+          <button class="accordion-trigger" data-category="${escapeAttr(category.id)}" aria-expanded="${isOpen}">
+            <span>${escapeHtml(category.label)}</span>
+            <span class="chevron">›</span>
+          </button>
+          <div class="subcategory-list">${subitems}</div>
+        </section>
+      `;
+    })
     .join("");
 }
 
 function cardTemplate(service) {
-  const isFavorite = state.favorites.has(service.name);
-  const hasPricing = Boolean(service.links?.pricing);
-  const hasDocs = Boolean(service.links?.docs);
-  const extraLinks = [
-    hasPricing
-      ? `<a href="${escapeAttr(service.links.pricing)}" target="_blank" rel="noreferrer">가격</a>`
-      : "",
-    hasDocs
-      ? `<a href="${escapeAttr(service.links.docs)}" target="_blank" rel="noreferrer">문서/API</a>`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("");
-  const favoriteLabel = isFavorite ? `${service.name} 즐겨찾기 해제` : `${service.name} 즐겨찾기 추가`;
-  const actionClass = hasPricing && hasDocs ? "has-two-links" : hasPricing || hasDocs ? "has-one-link" : "has-no-links";
-
   return `
     <article class="card">
-      <div class="card-body">
-        <div class="card-top">
-          <img class="logo" src="${escapeAttr(favicon(service.url))}" alt="" loading="lazy" />
-          <span class="badge ${escapeAttr(service.kind)}">${escapeHtml(service.subcategory)}</span>
-        </div>
-        <h3>${escapeHtml(service.name)}</h3>
-        <p>${escapeHtml(service.summary)}</p>
-        <div class="facts">
-          <span>${escapeHtml(labels.pricing[service.pricing])}</span>
-          <span>${service.korean ? "한국어 지원" : "영문 중심"}</span>
-          <span>${service.api ? "API 제공" : "웹 중심"}</span>
-          <span>${escapeHtml(labels.difficulty[service.difficulty])}</span>
-        </div>
-        <div class="meta">
-          ${service.tags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}
+      <div class="card-main">
+        <img class="logo" src="${escapeAttr(favicon(service.url))}" alt="" loading="lazy" />
+        <div class="card-copy">
+          <h3>${escapeHtml(service.name)}</h3>
+          <p>${escapeHtml(service.summary)}</p>
         </div>
       </div>
-      <div class="card-actions ${actionClass}">
-        <button class="icon-action ${isFavorite ? "active" : ""}" data-favorite="${escapeAttr(service.name)}" type="button" title="${escapeAttr(favoriteLabel)}" aria-label="${escapeAttr(favoriteLabel)}" aria-pressed="${isFavorite}">${isFavorite ? "★" : "☆"}</button>
-        <button class="icon-action" data-copy="${escapeAttr(service.url)}" type="button" title="${escapeAttr(service.name)} URL 복사" aria-label="${escapeAttr(service.name)} URL 복사">복사</button>
-        ${extraLinks}
-        <a class="visit" href="${escapeAttr(service.url)}" target="_blank" rel="noreferrer">사이트 열기</a>
+      <div class="meta">
+        ${service.tags.slice(0, 4).map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}
       </div>
+      <a class="visit" href="${escapeAttr(service.url)}" target="_blank" rel="noreferrer">열기</a>
     </article>
   `;
 }
@@ -222,82 +159,61 @@ function cardTemplate(service) {
 function renderCards() {
   const category = state.categories.find((item) => item.id === state.activeCategory);
   const visible = state.services.filter(serviceMatches);
+  const recommendation = state.recommendations.find((item) => item.id === state.activeRecommendation);
 
   activeTitle.textContent = category.label;
-  activeMeta.textContent = `${category.description} · ${state.activeSubcategory}`;
+  activeMeta.textContent = [
+    category.description,
+    state.activeSubcategory,
+    recommendation?.label,
+  ]
+    .filter(Boolean)
+    .join(" · ");
   resultCount.textContent = `${visible.length}개`;
 
-  if (!visible.length) {
-    cards.innerHTML = `<div class="empty">검색 조건에 맞는 서비스가 없습니다.</div>`;
-    return;
-  }
-
-  const favorites = visible.filter((service) => state.favorites.has(service.name));
-  const regular = visible.filter((service) => !state.favorites.has(service.name));
-  cards.innerHTML = [...favorites, ...regular].map(cardTemplate).join("");
+  cards.innerHTML = visible.length
+    ? visible.map(cardTemplate).join("")
+    : `<div class="empty">조건에 맞는 서비스가 없습니다.</div>`;
 }
 
 function render() {
-  renderTabs();
-  renderSideMenu();
   renderRecommendations();
+  renderCategoryMenu();
   renderCards();
 }
 
 function resetAllFilters() {
   state.filters = { free: false, korean: false, api: false, difficulty: "all", query: "" };
+  state.activeRecommendation = "";
   searchInput.value = "";
   freeFilter.checked = false;
   koreanFilter.checked = false;
   apiFilter.checked = false;
   difficultyFilter.value = "all";
-  renderCards();
+  render();
 }
 
-tabs.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-category]");
-  if (!button) return;
-  state.activeCategory = button.dataset.category;
-  state.activeSubcategory = "전체";
-  render();
-});
-
-sideMenu.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-subcategory]");
-  if (!button) return;
-  state.activeSubcategory = button.dataset.subcategory;
-  render();
-});
-
-recommendationTabs.addEventListener("click", (event) => {
+recommendationTags.addEventListener("click", (event) => {
   const button = event.target.closest("[data-recommendation]");
   if (!button) return;
   state.activeRecommendation = button.dataset.recommendation;
-  renderRecommendations();
+  render();
 });
 
-cards.addEventListener("click", async (event) => {
-  const favorite = event.target.closest("[data-favorite]");
-  const copy = event.target.closest("[data-copy]");
+categoryMenu.addEventListener("click", (event) => {
+  const categoryButton = event.target.closest(".accordion-trigger");
+  const subcategoryButton = event.target.closest("[data-subcategory]");
 
-  if (favorite) {
-    const name = favorite.dataset.favorite;
-    state.favorites.has(name) ? state.favorites.delete(name) : state.favorites.add(name);
-    saveFavorites();
-    renderCards();
+  if (categoryButton) {
+    state.activeCategory = categoryButton.dataset.category;
+    state.activeSubcategory = "전체";
+    render();
   }
 
-  if (copy) {
-    try {
-      await copyText(copy.dataset.copy);
-      copy.textContent = "완료";
-    } catch {
-      copy.textContent = "실패";
-    } finally {
-      setTimeout(() => {
-        copy.textContent = "복사";
-      }, 1200);
-    }
+  if (subcategoryButton) {
+    state.activeCategory = subcategoryButton.dataset.category;
+    state.activeSubcategory = subcategoryButton.dataset.subcategory;
+    render();
   }
 });
 
@@ -332,7 +248,6 @@ async function init() {
     state.recommendations = data.recommendations;
     state.services = data.services;
     state.activeCategory = data.categories[0].id;
-    state.activeRecommendation = data.recommendations[0].id;
     render();
   } catch (error) {
     cards.innerHTML = `<div class="empty">데이터를 불러오지 못했습니다. Vercel 배포 주소나 로컬 정적 서버로 열어주세요.</div>`;

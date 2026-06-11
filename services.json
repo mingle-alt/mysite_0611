@@ -68,6 +68,19 @@
         "AI 에이전트",
         "앱 연결"
       ]
+    },
+    {
+      "id": "marketing",
+      "label": "마케팅/영업",
+      "description": "카피라이팅, SNS, 광고, CRM, 이메일, SEO를 돕는 AI 도구",
+      "subcategories": [
+        "전체",
+        "카피라이팅",
+        "SNS 콘텐츠",
+        "광고/퍼포먼스",
+        "CRM/이메일",
+        "SEO"
+      ]
     }
   ],
   "recommendations": [
@@ -100,6 +113,11 @@
       "id": "automation",
       "label": "자동화 추천",
       "description": "반복 업무, 앱 연결, 에이전트 운영에 유용한 도구"
+    },
+    {
+      "id": "marketing",
+      "label": "마케팅 추천",
+      "description": "마케팅 콘텐츠, 세일즈, CRM, SEO 업무에 유용한 도구"
     }
   ],
   "services": [
@@ -841,11 +859,18 @@
       "api": false,
       "difficulty": "medium",
       "recommendedFor": [
-        "work"
+        "work",
+        "marketing"
       ],
       "links": {
         "official": "https://www.notion.com/product/ai"
-      }
+      },
+      "extraPlacements": [
+        {
+          "category": "marketing",
+          "subcategory": "카피라이팅"
+        }
+      ]
     },
     {
       "name": "Gamma",
@@ -1061,6 +1086,152 @@
       ],
       "links": {
         "official": "https://chat.qwen.ai/"
+      }
+    },
+    {
+      "name": "Jasper",
+      "url": "https://www.jasper.ai/",
+      "category": "marketing",
+      "subcategory": "카피라이팅",
+      "kind": "marketing",
+      "tags": [
+        "브랜드 보이스",
+        "블로그",
+        "마케팅 카피"
+      ],
+      "summary": "브랜드 톤에 맞춘 블로그, 캠페인 카피, 마케팅 콘텐츠 제작에 특화된 AI 글쓰기 플랫폼입니다.",
+      "pricing": "paid",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "marketing"
+      ],
+      "links": {
+        "official": "https://www.jasper.ai/",
+        "pricing": "https://www.jasper.ai/pricing"
+      }
+    },
+    {
+      "name": "Copy.ai",
+      "url": "https://www.copy.ai/",
+      "category": "marketing",
+      "subcategory": "카피라이팅",
+      "kind": "marketing",
+      "tags": [
+        "세일즈 카피",
+        "GTM",
+        "워크플로"
+      ],
+      "summary": "마케팅 카피와 세일즈 메시지, GTM 업무 자동화 워크플로를 만드는 AI 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "marketing",
+        "automation"
+      ],
+      "links": {
+        "official": "https://www.copy.ai/",
+        "pricing": "https://www.copy.ai/prices"
+      }
+    },
+    {
+      "name": "HubSpot AI",
+      "url": "https://www.hubspot.com/artificial-intelligence",
+      "category": "marketing",
+      "subcategory": "CRM/이메일",
+      "kind": "marketing",
+      "tags": [
+        "CRM",
+        "세일즈",
+        "콘텐츠"
+      ],
+      "summary": "HubSpot CRM과 마케팅, 세일즈, 고객지원 워크플로에 연결되는 AI 기능 모음입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": true,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "marketing",
+        "work"
+      ],
+      "links": {
+        "official": "https://www.hubspot.com/artificial-intelligence",
+        "pricing": "https://www.hubspot.com/pricing"
+      }
+    },
+    {
+      "name": "Mailchimp AI",
+      "url": "https://mailchimp.com/features/ai-marketing-tools/",
+      "category": "marketing",
+      "subcategory": "CRM/이메일",
+      "kind": "marketing",
+      "tags": [
+        "이메일",
+        "캠페인",
+        "자동화"
+      ],
+      "summary": "이메일 캠페인 작성, 세그먼트, 자동화, 콘텐츠 최적화를 돕는 Mailchimp의 AI 마케팅 도구입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": true,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "marketing"
+      ],
+      "links": {
+        "official": "https://mailchimp.com/features/ai-marketing-tools/",
+        "pricing": "https://mailchimp.com/pricing/marketing/"
+      }
+    },
+    {
+      "name": "Surfer SEO",
+      "url": "https://surferseo.com/",
+      "category": "marketing",
+      "subcategory": "SEO",
+      "kind": "marketing",
+      "tags": [
+        "SEO",
+        "콘텐츠 최적화",
+        "키워드"
+      ],
+      "summary": "검색 상위 콘텐츠를 분석해 SEO 글쓰기, 키워드, 콘텐츠 최적화를 돕는 AI SEO 도구입니다.",
+      "pricing": "paid",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "marketing"
+      ],
+      "links": {
+        "official": "https://surferseo.com/",
+        "pricing": "https://surferseo.com/pricing/"
+      }
+    },
+    {
+      "name": "AdCreative.ai",
+      "url": "https://www.adcreative.ai/",
+      "category": "marketing",
+      "subcategory": "광고/퍼포먼스",
+      "kind": "marketing",
+      "tags": [
+        "광고 소재",
+        "퍼포먼스",
+        "배너"
+      ],
+      "summary": "광고 이미지와 카피, 크리에이티브 성과 예측을 빠르게 만드는 퍼포먼스 마케팅용 AI 도구입니다.",
+      "pricing": "paid",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "marketing"
+      ],
+      "links": {
+        "official": "https://www.adcreative.ai/",
+        "pricing": "https://www.adcreative.ai/pricing"
       }
     }
   ]

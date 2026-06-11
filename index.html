@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="AI 챗봇, 이미지/음악 생성, 앱 제작, 개발자 도구, 업무 리서치 서비스를 분류해 모아둔 링크 허브"
+      content="AI 챗봇, 이미지/음악 생성, 앱 제작, 마케팅, 자동화, 리서치 서비스를 한곳에서 찾는 링크 허브"
     />
     <meta property="og:title" content="AI 서비스 링크 허브" />
-    <meta property="og:description" content="AI 서비스를 카테고리, 필터, 추천 목록으로 빠르게 찾아보세요." />
+    <meta property="og:description" content="AI 서비스를 검색, 카테고리, 추천 필터로 빠르게 찾아보세요." />
     <title>AI 서비스 링크 허브</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -18,55 +18,48 @@
         <span class="brand-mark">AI</span>
         <div>
           <h1>AI 서비스 링크 허브</h1>
-          <p>챗봇, 제작 도구, 코딩, 모델 허브를 한 화면에서 정리했습니다.</p>
+          <p>업무에 맞는 AI 도구를 검색하고 바로 열어보세요.</p>
         </div>
       </div>
       <label class="search">
-        <span>검색</span>
-        <input id="searchInput" type="search" placeholder="Claude, 음악, 코딩..." />
+        <span>서비스 검색</span>
+        <input id="searchInput" type="search" placeholder="Claude, 마케팅, 자동화, SEO..." />
       </label>
     </header>
 
-    <nav class="category-tabs" id="categoryTabs" aria-label="대 카테고리"></nav>
-
     <main class="layout">
       <aside class="sidebar">
-        <div class="sidebar-title">소 카테고리</div>
-        <nav id="sideMenu" class="side-menu" aria-label="소 카테고리"></nav>
+        <section class="sidebar-section">
+          <div class="sidebar-title">추천 필터</div>
+          <div class="recommendation-tags" id="recommendationTags"></div>
+        </section>
 
-        <div class="sidebar-title filters-title">상세 필터</div>
-        <div class="filters" aria-label="상세 필터">
-          <label><input type="checkbox" id="freeFilter" /> 무료로 시작 가능</label>
-          <label><input type="checkbox" id="koreanFilter" /> 한국어 지원</label>
-          <label><input type="checkbox" id="apiFilter" /> API 제공</label>
+        <section class="sidebar-section">
+          <div class="sidebar-title">카테고리</div>
+          <nav id="categoryMenu" class="category-menu" aria-label="카테고리"></nav>
+        </section>
+      </aside>
+
+      <section class="content">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" id="activeMeta">전체</p>
+            <h2 id="activeTitle">AI 서비스</h2>
+          </div>
+          <div class="count" id="resultCount">0개</div>
+        </div>
+
+        <div class="filterbar" aria-label="상세 필터">
+          <label><input type="checkbox" id="freeFilter" /> 무료 시작</label>
+          <label><input type="checkbox" id="koreanFilter" /> 한국어</label>
+          <label><input type="checkbox" id="apiFilter" /> API</label>
           <select id="difficultyFilter" aria-label="난이도">
             <option value="all">난이도 전체</option>
             <option value="easy">쉬움</option>
             <option value="medium">보통</option>
             <option value="advanced">전문가용</option>
           </select>
-          <button class="reset" id="resetFilters" type="button">필터 초기화</button>
-        </div>
-      </aside>
-
-      <section class="content">
-        <section class="recommendations" aria-label="추천 서비스">
-          <div class="section-head compact">
-            <div>
-              <p class="eyebrow">추천 모음</p>
-              <h2>목적별 바로가기</h2>
-            </div>
-          </div>
-          <div class="recommendation-tabs" id="recommendationTabs"></div>
-          <div class="recommended-cards" id="recommendedCards"></div>
-        </section>
-
-        <div class="section-head">
-          <div>
-            <p class="eyebrow" id="activeMeta">추천 링크</p>
-            <h2 id="activeTitle">전체 서비스</h2>
-          </div>
-          <div class="count" id="resultCount">0개</div>
+          <button class="reset" id="resetFilters" type="button">초기화</button>
         </div>
 
         <div class="cards" id="cards"></div>
