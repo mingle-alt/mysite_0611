@@ -182,12 +182,70 @@ h1 {
   color: #0f4fb9;
 }
 
+.filters-title {
+  margin-top: 22px;
+}
+
+.filters {
+  display: grid;
+  gap: 10px;
+}
+
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  color: #344054;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.filters input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+}
+
+.filters select,
+.reset {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.filters select {
+  padding: 0 10px;
+}
+
+.reset {
+  cursor: pointer;
+}
+
+.reset:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.recommendations {
+  margin-bottom: 28px;
+}
+
 .section-head {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 18px;
   margin-bottom: 18px;
+}
+
+.section-head.compact {
+  margin-bottom: 12px;
 }
 
 .eyebrow {
@@ -219,6 +277,88 @@ h2 {
   gap: 16px;
 }
 
+.recommendation-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+  padding-bottom: 2px;
+}
+
+.recommendation-tab {
+  flex: 0 0 auto;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.recommendation-tab.active {
+  border-color: rgba(19, 138, 114, 0.32);
+  background: rgba(19, 138, 114, 0.12);
+  color: #08715c;
+}
+
+.recommended-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.mini-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.mini-card div {
+  min-width: 0;
+}
+
+.mini-card strong,
+.mini-card span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-card strong {
+  font-size: 14px;
+}
+
+.mini-card span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.mini-card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: var(--ink);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
 .card {
   display: grid;
   min-height: 238px;
@@ -242,6 +382,11 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #f3f5f8;
+}
+
+.logo.small {
+  width: 34px;
+  height: 34px;
 }
 
 .badge {
@@ -285,6 +430,23 @@ h2 {
   line-height: 1.55;
 }
 
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.facts span {
+  padding: 5px 8px;
+  border: 1px solid #e5e9f0;
+  border-radius: 8px;
+  background: white;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;
@@ -315,6 +477,37 @@ h2 {
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
+}
+
+.card-actions {
+  align-self: end;
+  display: grid;
+  grid-template-columns: 42px 54px repeat(2, minmax(0, auto)) minmax(110px, 1fr);
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.card-actions a:not(.visit),
+.icon-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.icon-action.active {
+  border-color: rgba(183, 121, 31, 0.35);
+  background: rgba(183, 121, 31, 0.14);
+  color: #8a5a10;
 }
 
 .visit:hover {
@@ -352,6 +545,10 @@ h2 {
   .side-menu {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
+
+  .filters {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
 }
 
 @media (max-width: 520px) {
@@ -372,5 +569,13 @@ h2 {
 
   .cards {
     grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    grid-template-columns: 42px 1fr 1fr;
+  }
+
+  .card-actions .visit {
+    grid-column: 1 / -1;
   }
 }
