@@ -870,6 +870,30 @@
       }
     },
     {
+      "name": "DocsHunt",
+      "url": "https://docshunt.ai/",
+      "category": "work",
+      "subcategory": "문서/노트",
+      "kind": "research",
+      "tags": [
+        "사업계획서",
+        "AI 문서",
+        "한국어"
+      ],
+      "summary": "사업 아이디어를 입력하면 AI가 완성도 높은 사업계획서를 자동으로 생성하는 한국 스타트업 플랫폼입니다. Word·한글(.hwp) 형식 출력을 지원합니다.",
+      "pricing": "freemium",
+      "korean": true,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "beginner",
+        "work"
+      ],
+      "links": {
+        "official": "https://docshunt.ai/"
+      }
+    },
+    {
       "name": "Notion AI",
       "url": "https://www.notion.com/product/ai",
       "category": "work",
