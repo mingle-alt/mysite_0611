@@ -43,7 +43,8 @@
         "모델 허브",
         "API 콘솔",
         "프레임워크",
-        "로컬 AI"
+        "로컬 AI",
+        "교육/실습"
       ]
     },
     {
@@ -1232,6 +1233,238 @@
       "links": {
         "official": "https://www.adcreative.ai/",
         "pricing": "https://www.adcreative.ai/pricing"
+      }
+    },
+    {
+      "name": "You.com",
+      "url": "https://you.com/",
+      "category": "chat",
+      "subcategory": "실시간 검색",
+      "kind": "research",
+      "tags": [
+        "프라이버시",
+        "검색",
+        "개인화"
+      ],
+      "summary": "프라이버시 중심의 AI 검색 플랫폼으로 개인화된 검색 경험을 제공합니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "beginner"
+      ],
+      "links": {
+        "official": "https://you.com/"
+      }
+    },
+    {
+      "name": "Phind",
+      "url": "https://phind.com/",
+      "category": "chat",
+      "subcategory": "실시간 검색",
+      "kind": "research",
+      "tags": [
+        "개발자",
+        "코드",
+        "기술 Q&A"
+      ],
+      "summary": "개발자 전용 AI 검색 엔진으로 코드와 기술 질문에 최적화되어 있습니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "developer"
+      ],
+      "links": {
+        "official": "https://phind.com/"
+      }
+    },
+    {
+      "name": "CLOVA X",
+      "url": "https://clova-x.naver.com/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "네이버",
+        "한국어",
+        "대화형 AI"
+      ],
+      "summary": "네이버의 한국어 특화 AI 어시스턴트입니다.",
+      "pricing": "freemium",
+      "korean": true,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "beginner",
+        "work"
+      ],
+      "links": {
+        "official": "https://clova-x.naver.com/"
+      }
+    },
+    {
+      "name": "Monica AI",
+      "url": "https://monica.ai/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "브라우저",
+        "확장",
+        "어시스턴트"
+      ],
+      "summary": "브라우저 내장형 AI 어시스턴트로 어느 웹페이지에서나 바로 사용할 수 있습니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "beginner"
+      ],
+      "links": {
+        "official": "https://monica.ai/"
+      }
+    },
+    {
+      "name": "Character.ai",
+      "url": "https://character.ai/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "캐릭터",
+        "대화",
+        "엔터테인먼트"
+      ],
+      "summary": "수백만 개의 AI 캐릭터와 대화하는 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": true,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "beginner"
+      ],
+      "links": {
+        "official": "https://character.ai/"
+      }
+    },
+    {
+      "name": "DeepSeek",
+      "url": "https://chat.deepseek.com/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "오픈소스",
+        "코딩",
+        "고성능"
+      ],
+      "summary": "중국 오픈소스 AI로 고성능 챗과 코딩 작업을 무료로 활용할 수 있습니다.",
+      "pricing": "free",
+      "korean": false,
+      "api": true,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "developer"
+      ],
+      "links": {
+        "official": "https://chat.deepseek.com/"
+      }
+    },
+    {
+      "name": "Mistral Le Chat",
+      "url": "https://chat.mistral.ai/",
+      "category": "chat",
+      "subcategory": "국내외 대안",
+      "kind": "chat",
+      "tags": [
+        "유럽",
+        "GDPR",
+        "챗봇"
+      ],
+      "summary": "유럽 AI 스타트업 Mistral의 챗봇으로 GDPR 준수 환경을 강조합니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "medium",
+      "recommendedFor": [
+        "beginner",
+        "developer"
+      ],
+      "links": {
+        "official": "https://chat.mistral.ai/"
+      }
+    },
+    {
+      "name": "Kaggle",
+      "url": "https://www.kaggle.com/",
+      "category": "dev",
+      "subcategory": "교육/실습",
+      "kind": "research",
+      "tags": [
+        "데이터사이언스",
+        "경진대회",
+        "무료 실습"
+      ],
+      "summary": "데이터사이언스 경진대회와 무료 ML 실습을 제공하는 플랫폼입니다.",
+      "pricing": "free",
+      "korean": false,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "developer"
+      ],
+      "links": {
+        "official": "https://www.kaggle.com/"
+      }
+    },
+    {
+      "name": "fast.ai",
+      "url": "https://www.fast.ai/",
+      "category": "dev",
+      "subcategory": "교육/실습",
+      "kind": "research",
+      "tags": [
+        "딥러닝",
+        "교육",
+        "실용"
+      ],
+      "summary": "실용적 딥러닝 무료 교육 플랫폼입니다.",
+      "pricing": "free",
+      "korean": false,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "developer"
+      ],
+      "links": {
+        "official": "https://www.fast.ai/"
+      }
+    },
+    {
+      "name": "DeepLearning.AI",
+      "url": "https://www.deeplearning.ai/",
+      "category": "dev",
+      "subcategory": "교육/실습",
+      "kind": "research",
+      "tags": [
+        "Andrew Ng",
+        "학습",
+        "AI 교육"
+      ],
+      "summary": "Andrew Ng이 설립한 AI 전문 교육 플랫폼입니다.",
+      "pricing": "freemium",
+      "korean": false,
+      "api": false,
+      "difficulty": "easy",
+      "recommendedFor": [
+        "developer"
+      ],
+      "links": {
+        "official": "https://www.deeplearning.ai/"
       }
     }
   ]
