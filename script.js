@@ -175,21 +175,24 @@ function renderRecommendations() {
 
 function cardTemplate(service) {
   const isFavorite = state.favorites.has(service.name);
+  const hasPricing = Boolean(service.links?.pricing);
+  const hasDocs = Boolean(service.links?.docs);
   const extraLinks = [
-    service.links?.pricing
+    hasPricing
       ? `<a href="${escapeAttr(service.links.pricing)}" target="_blank" rel="noreferrer">가격</a>`
       : "",
-    service.links?.docs
+    hasDocs
       ? `<a href="${escapeAttr(service.links.docs)}" target="_blank" rel="noreferrer">문서/API</a>`
       : "",
   ]
     .filter(Boolean)
     .join("");
   const favoriteLabel = isFavorite ? `${service.name} 즐겨찾기 해제` : `${service.name} 즐겨찾기 추가`;
+  const actionClass = hasPricing && hasDocs ? "has-two-links" : hasPricing || hasDocs ? "has-one-link" : "has-no-links";
 
   return `
     <article class="card">
-      <div>
+      <div class="card-body">
         <div class="card-top">
           <img class="logo" src="${escapeAttr(favicon(service.url))}" alt="" loading="lazy" />
           <span class="badge ${escapeAttr(service.kind)}">${escapeHtml(service.subcategory)}</span>
@@ -206,7 +209,7 @@ function cardTemplate(service) {
           ${service.tags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("")}
         </div>
       </div>
-      <div class="card-actions">
+      <div class="card-actions ${actionClass}">
         <button class="icon-action ${isFavorite ? "active" : ""}" data-favorite="${escapeAttr(service.name)}" type="button" title="${escapeAttr(favoriteLabel)}" aria-label="${escapeAttr(favoriteLabel)}" aria-pressed="${isFavorite}">${isFavorite ? "★" : "☆"}</button>
         <button class="icon-action" data-copy="${escapeAttr(service.url)}" type="button" title="${escapeAttr(service.name)} URL 복사" aria-label="${escapeAttr(service.name)} URL 복사">복사</button>
         ${extraLinks}
