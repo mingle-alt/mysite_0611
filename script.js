@@ -211,6 +211,18 @@ difficultyFilter.addEventListener("change", () => {
 });
 resetFilters.addEventListener("click", resetAllFilters);
 
+async function loadVisitorCount() {
+  const el = document.querySelector("#visitorCount");
+  try {
+    const res = await fetch("https://api.countapi.xyz/hit/ai-link-hub-mysite/visits");
+    if (!res.ok) throw new Error();
+    const { value } = await res.json();
+    el.textContent = value.toLocaleString("ko-KR");
+  } catch {
+    el.textContent = "—";
+  }
+}
+
 async function init() {
   try {
     const response = await fetch("services.json");
@@ -227,3 +239,4 @@ async function init() {
 }
 
 init();
+loadVisitorCount();

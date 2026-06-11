@@ -411,6 +411,29 @@ h2 {
   text-align: center;
 }
 
+.site-footer {
+  padding: 32px 24px 40px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.visitor-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.visitor-count {
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
 @media (max-width: 920px) {
   .topbar {
     position: static;
