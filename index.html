@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 서비스 링크 허브</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">AI</span>
+        <div>
+          <h1>AI 서비스 링크 허브</h1>
+          <p>챗봇, 제작 도구, 코딩, 모델 허브를 한 화면에서 정리했습니다.</p>
+        </div>
+      </div>
+      <label class="search">
+        <span>검색</span>
+        <input id="searchInput" type="search" placeholder="Claude, 음악, 코딩..." />
+      </label>
+    </header>
+
+    <nav class="category-tabs" id="categoryTabs" aria-label="대 카테고리"></nav>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-title">소 카테고리</div>
+        <nav id="sideMenu" class="side-menu" aria-label="소 카테고리"></nav>
+      </aside>
+
+      <section class="content">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" id="activeMeta">추천 링크</p>
+            <h2 id="activeTitle">전체 서비스</h2>
+          </div>
+          <div class="count" id="resultCount">0개</div>
+        </div>
+
+        <div class="cards" id="cards"></div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
