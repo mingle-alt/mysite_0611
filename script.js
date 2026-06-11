@@ -214,10 +214,10 @@ resetFilters.addEventListener("click", resetAllFilters);
 async function loadVisitorCount() {
   const el = document.querySelector("#visitorCount");
   try {
-    const res = await fetch("https://api.countapi.xyz/hit/ai-link-hub-mysite/visits");
+    const res = await fetch("https://api.counterapi.dev/v1/ai-link-hub-mysite/visits/up");
     if (!res.ok) throw new Error();
-    const { value } = await res.json();
-    el.textContent = value.toLocaleString("ko-KR");
+    const { count } = await res.json();
+    el.textContent = count.toLocaleString("ko-KR");
   } catch {
     el.textContent = "—";
   }
